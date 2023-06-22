@@ -51,6 +51,7 @@ puts "#{year}年#{month}月は#{days}日間あります"
 
 # 解説
 - 2月以外は各月の日数が決まっています。したがって、まずは以下のようにコードを記述しましょう。
+```
 def get_days(year, month)
   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] # 各月の日数は配列で管理
   return month_days[month - 1]
@@ -63,9 +64,10 @@ month = gets.to_i
 
 days = get_days(year, month)
 puts "#{year}年#{month}月は#{days}日間あります"
+```
 
 - そして、2月の時だけ条件式を用いて出力をします。
-
+```
 def get_days(year, month)
   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   if month == 2 # 2月のとき
@@ -85,6 +87,7 @@ month = gets.to_i
 
 days = get_days(year, month)
 puts "#{year}年#{month}月は#{days}日間あります"
+```
 
 - 閏年か判定します。閏年の条件は3つありましたが、以下のようにまとめることができます。
 
@@ -94,6 +97,7 @@ puts "#{year}年#{month}月は#{days}日間あります"
 - したがって、以下のような条件分岐を設けることができます。
 
 - 【例】
+```
 year = 指定の年
 
 if year % 4 == 0  # 年が4で割り切れること
@@ -103,9 +107,10 @@ if year % 4 == 0  # 年が4で割り切れること
     # 閏年
   end
 end
+```
 
 - 上記のロジックを反映しましょう。
-
+```
 def get_days(year, month)
   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   if month == 2
@@ -132,3 +137,4 @@ month = gets.to_i
 
 days = get_days(year, month)
 puts "#{year}年#{month}月は#{days}日間あります"
+```
