@@ -18,6 +18,7 @@
 - 2000年3月=>"2000年3月は31日間あります"
 
 # 解答
+```
 def get_days(year, month)
   month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   if month == 2
@@ -36,7 +37,7 @@ def get_days(year, month)
 
   return days
 end
-
+```
 puts "年を入力してください："
 year = gets.to_i
 puts "月を入力してください："
