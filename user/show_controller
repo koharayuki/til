@@ -1,0 +1,18 @@
+# ユーザー編集機能を実装する例(user/controller)
+
+# ニックネーム、ジョブ、自己紹介文がすべて空欄じゃない場合
+    if !user_params[:nickname].empty? && !user_params[:job].empty? && !user_params[:description].empty?
+      # UPDATE文で更新
+      args = [
+        'UPDATE users SET nickname = ?, job = ?, description = ? WHERE id = ?',
+        user_params[:nickname],
+        user_params[:job],
+        user_params[:description],
+        @user.id
+      ]
+      sql = ActiveRecord::Base.send(:sanitize_sql_array, args)
+      ActiveRecord::Base.connection.execute(sql)
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
