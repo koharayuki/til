@@ -1,8 +1,5 @@
 # 問題.1
 ```
-1
-2
-
 puts hash.keys
 puts hash.values
 上記のメソッドを実行した時に
