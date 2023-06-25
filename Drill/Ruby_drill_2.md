@@ -17,7 +17,7 @@ Alice
 Taro
 ```
 
-# 模範解答
+# 解答
 
 ```
 user_data.each do |u|
