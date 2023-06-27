@@ -50,6 +50,42 @@ Rubyでの記述方法と異なるのは以下の点です。
 
 これらについても、RubyとJavaで大きな違いはありません。
 
+<サンプルコード>
+```java
+class Main {
+  public static void main(String[] args) {
+    int value = 3;
+
+    if (value > 0){
+      System.out.println("値は正です"); 
+    }else if (value < 0){
+      System.out.println("値は負です"); 
+    }else {
+      System.out.println("値は0です"); 
+    }
+  }
+}
+```
+
+基本的に使い方は同じで、以下のように記述します。
+
+```java
+if (条件A) { 
+  // 処理A
+} else if () {
+  // 処理B
+} else {
+  // 処理C
+}
+```
+
+条件を満たすかどうかで分岐が行われ、以下の動作になります。
+
+- 条件Aが「真」の時は処理Aが実行される
+- 条件Aは「偽」で、条件Bが「真」の時は処理Bが実行される
+- 全ての条件が「偽」の時は処理Cが実行される
+
+このように処理の流れはRubyと一緒ですが、Rubyの「elsif」は、Javaでは「else if」と記述することに注意しましょう。
 
 
 
