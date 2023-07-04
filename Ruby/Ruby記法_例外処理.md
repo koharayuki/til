@@ -120,13 +120,73 @@ namespace :ここにグループ名を記述する do
 end
 ```
 
-### environmentメソッド
+## environmentメソッド
+
+environmentメソッドは、「タスクの処理をアプリケーション環境に依存させた上で実行する」ということを可能にします。ここでいう「アプリケーション環境」とは、「Rails環境」のことです。Rails環境に依存させる（読み込まれる）ことで、Rails上に設定したモデルなどの情報を取り扱うことができます。
+今回の場合、`Userモデル`を扱うにあたっての非常に重要な役割を果たしています。
+
+Rakeファイルに処理を記述したあと、ターミナルで以下のようにコマンドを実行することで、タスクを実行できます。
+
+```ターミナル
+# Rakeタスクの実行
+% rails namespaceの名前:taskの名前
+```
 
 
+# アプリケーションを確認しよう
 
+現在のアプリケーションを確認し、どのように仕様を達成するための処理が実装されているのか確認しましょう。
+すでにRakeタスクが作成されており、「全ユーザーにチケットを10枚発行する処理」は、`lib/tasks/distribute_ticket.rake`に定義されています。
 
+```ruby:lib/tasks/distribute_ticket.rake
+namespace :distribute_ticket do
+  desc "全ユーザーのticket_countを10増加させる"
+  task execute: :environment do
+    User.find_each do |user|
+      user.increment!(:ticket_count, 10)
+    end
+  end
+end
+```
 
+## incrementメソッド
 
+incrementメソッドは、カラム名と数字を引数に取り、引数の数だけカラムの値を増加させます。今回は、「ticket_countカラムの値を10増加させる」という意味です。
 
+ターミナルから、このタスクを実行することで、usersテーブルにある全レコードのticket_countの値が10増加します。
 
+一見問題なく見える処理ですが、現在の実装には大きな問題があります。
+
+## 問題点
+
+今回rails db:seedを実行して投入した初期データには、意図的に例外を発生させるための値を1つだけ投入させています。
+
+seeds.rbの6, 7行目に注目してください。
+
+```ruby:db/seeds.rb
+# ticket_countをint型で許容できる最大の値にする
+User.find(500).update(ticket_count: 2147483647)
+```
+
+このコードで、idが500のユーザーのticket_countを、2147483647に変更しています。
+
+![image](https://github.com/koharayuki/til/assets/132040884/6d924751-bb94-464a-ba96-537a62e3981a)
+
+これは、SQLのinteger型が許容できる最大の値であり、もし2147483647より大きな値を保存しようとすると`RangeError`という例外が発生し、保存に失敗します。
+
+##  タスクを実行して例外を確認する
+
+実際にticket_countの値を増やして、上限を超えた値となる例外を発生させます。
+
+```ターミナル
+# ticket_countカラムの値を10増加させるタスクを実行
+% rails distribute_ticket:execute
+```
+
+タスク処理が行われると「ticket_countカラムの値が10増加」されます。
+処理を終えると、テーブルの状態は以下のようになります。
+
+![image](https://github.com/koharayuki/til/assets/132040884/6dbe67b5-4e39-4b6b-b6a1-9a8ae6e1496d)
+
+idが499までは問題なくticeket_countが10増加し、例外の発生するidが500番目以降のユーザーについては、処理が中止され、ticket_countが増えていないことがわかります。
 
