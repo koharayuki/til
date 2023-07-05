@@ -176,7 +176,6 @@ vending_machine.pay(user)
 
 ![image](https://github.com/koharayuki/til/assets/132040884/bcda2d79-1867-4fe8-a762-ae9201b1a3d6)
 
-
 # ファイルを分割する
 
 ここまでで、飲み物自販機のアプリケーションを作成することができました。しかし、コードが長くなり、且つクラスの分かれ目も見分けにくくなっています。
@@ -200,7 +199,7 @@ vending_machine.pay(user)
  vending_machine.rb
 
 
-続いて、クラスごとに記述を分けましょう。この時、`application.rbですべてのファイルを読み込む`ことにします。
+続いて、クラスごとに記述を分けましょう。この時、`application.rb`ですべてのファイルを読み込む`ことにします。
 
 
 
