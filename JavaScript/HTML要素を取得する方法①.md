@@ -111,8 +111,80 @@ console.log(human.name)
 
 ![image](https://github.com/koharayuki/til/assets/132040884/9f489ff4-b1b3-43a7-a02e-63ce9c4cefd5)
 
-human.nameは元々は"yamada"という値が格納されていました。
+human.nameは元々は"yamada"という値が格納されていました。<br>
 しかし、`human.name = "yabe"`と記述することで、yamadaという値をyabeに上書きすることができました。
 
+##  (JavaScriptにおける) メソッド
 
+JavaScriptおけるメソッドとは、プロパティに紐づけられた処理のこと指します。プロパティには、「〇〇をしてほしい」という処理を、**関数**を用いることで代入できます。
+
+メソッドの書き方は、以下の通りです。
+
+![image](https://github.com/koharayuki/til/assets/132040884/e1eb46f6-8056-4f9d-97e0-a083d0c8b45d)
+
+※以下のコードでは、6行目にメソッドを定義し、9行目で実行しています。
+
+```javascript:オブジェクトのメソッド
+let human = {
+  name: "Tom",
+  gender: "man",
+  age: 22,
+
+  talk: function(){...},
+}
+
+human.talk()
+// talkメソッドが実行される
+```
+
+上記のコードでは、変数humanが定義され、そのhumanの要素（name, gender, age）が記述されています。
+このような要素を持ったhumanに対して`”話す” という処理（動作）`をして欲しい場合、9行目のように「human.talk」と記述することができます。  
+
+  
+# オブジェクトのメソッドを操作する
+
+```javascript:オブジェクトのメソッド
+let human = {
+  name: "Tom",
+  gender: man,
+  age: 22,
+
+  walk: function(){...},
+  talk: function(){...},
+  eat: function(){...}
+}
+
+human.walk()
+// walkメソッドが実行される
+
+human.talk()
+// talkメソッドが実行される
+
+human.eat()
+// eatメソッドが実行される
+```
+
+### メソッドを実行する
+
+```javascript:コンソール
+let human = {
+  name: "yamada",
+  age: 25,
+  address: 'Tokyo',
+
+  talk: function(){
+    console.log(`私の名前は${human.name}、${human.age}歳です。住所は${human.address}です`)
+  }
+}
+
+human.talk()
+```
+
+ブラウザのコンソールを確認して、以下のように結果が表示されていれば成功です。
+
+![image](https://github.com/koharayuki/til/assets/132040884/862509eb-d34d-474a-8655-e2a0890396e1)
+
+humanオブジェクトの中にtalkというメソッドを定義しました。<br>
+このメソッドの役割はconsole.logを用いて、あらかじめ記述した文字列をコンソール上に表示することです。<br>
+human.talk()という記述でメソッドが実行され、talkメソッドの処理が実行されました。
 
