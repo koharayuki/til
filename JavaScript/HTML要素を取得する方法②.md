@@ -158,12 +158,84 @@ document.querySelectorAll("h1")
 document.querySelector("セレクタ名") 
 ```
 
+### id名から取得する
 
+`document.getElementById()`を用いて、idが`lists`と指定された要素を取得します。
 
+![image](https://github.com/koharayuki/til/assets/132040884/85362ea5-d4a1-40c2-98a8-cd9f04b4e048)
 
+<コンソール>
+```javascript
+let list = document.getElementById("lists")
+console.log(list)
+```
 
+以下のようにコンソール上で、idがlistsと指定されているHTMLの要素が表示されていれば成功です。
+このように、JavaScriptの実装によってHTMLの要素を取得することができます。
 
+![image](https://github.com/koharayuki/til/assets/132040884/c5a7b6f2-0020-4bb8-806c-ce64001575b0)
 
+### class名から取得する
 
+`getElementsByClassName()`を用いて、class名が`pull-down-list`と指定されている複数の要素を取得します。
+
+![image](https://github.com/koharayuki/til/assets/132040884/a2dc843b-f87b-46b6-a264-bff8d30dc459)
+
+<コンソール>
+```javascript
+let lists = document.getElementsByClassName("pull-down-list")
+console.log(lists)
+```
+
+以下のようにコンソール上に表示されていれば成功です。
+現在、HTMLにはclass名がpull-down-listと指定されている要素が4つ存在します。
+以下のように出力されることで、これら4つの要素を取得できたことがわかります。
+
+![image](https://github.com/koharayuki/til/assets/132040884/ab8c9c51-f3ba-445e-9a86-7669efacdcfe)
+
+### セレクタ名から取得する
+
+querySelectorAll()を用いて、h1を取得します。
+
+![image](https://github.com/koharayuki/til/assets/132040884/85735e2d-d896-4381-9839-b39964347af1)
+
+<コンソール>
+```javascript
+let titles = document.querySelectorAll("h1")
+console.log(titles)
+```
+
+以下のようにコンソール上に表示されていれば成功です。h1要素が取得できていることが確認できます。
+
+![image](https://github.com/koharayuki/til/assets/132040884/27ae4aa5-b2ae-4bae-b355-57f98f933082)
+
+ここで、コンソール上にNodeListという表示があります。
+
+### getElementsByClassNameとquerySelectorAllの違い
+
+getElementsByClassNameとquerySelectorAllの違いは戻り値にあります。
+getElementsByClassNameは`HTMLCollection`というオブジェクトを、querySelectorAllは`NodeList`というオブジェクトを戻り値として返します。
+
+<取得するHTMLの情報>
+```html
+<ul class="hidden" id="modal">
+  <li class="modal-list">リスト1</li>
+  <li class="modal-list">リスト2</li>
+  <li class="modal-list">リスト3</li>
+  <li class="modal-list">リスト4</li>
+</ul>
+```
+
+<HTMLCollectionとNodeListの違い>
+```javascript
+console.log(document.getElementsByClassName("modal-list"))
+// => HTMLCollection(4) [li.modal-list, li.modal-list, li.modal-list, li.modal-list]
+
+console.log(document.querySelectorAll(".modal-list"))
+// => NodeList(4) [li.modal-list, li.modal-list, li.modal-list, li.modal-list]
+```
+
+HTMLCollectionとNodeListでは使えるメソッドが違います。
+例えば、forEach関数を使用する場合は、NodeListオブジェクトを戻り値として返すquerySelectorAllを使用します。
 
 
