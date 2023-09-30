@@ -180,6 +180,34 @@ usersテーブルが以下のようになっていれば成功です。
 
 表示する画面は、以下の条件で場合分けします。
 
+| 条件	               | 表示する画面               |
+| ------------------ | ----------------------- |
+| ログインしている場合	   | ユーザー名とログアウトボタン    |
+| ログインしていない場合	 | ログインと新規登録のリンク     |
+
+【app/views/users/index.html.erb】
+```erb
+<% if user_signed_in? %>
+  <li><%= "#{current_user.nickname}でログイン中" %></li>
+  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+<% else %>
+  <p>ログインしていません</p>
+  <li><%= link_to 'ログイン', new_user_session_path %></li>
+  <li><%= link_to '新規登録', new_user_path %></li>
+<% end %>
+```
+
+トップページで「新規登録」を選択した場合のビューを作成と編集します。
+
+「new.html.erb」を作成します。
+
+<img width="737" alt="スクリーンショット 2023-09-30 14 42 00" src="https://github.com/koharayuki/til/assets/132040884/b92f6f0d-c3ac-4964-a253-8f1b4ed73fc6">
+
+【app/views/users/new.html.erb】
+```erb
+<%= link_to "メールアドレスで登録", new_user_registration_path%>
+```
+
 
 
 
